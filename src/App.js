@@ -44,8 +44,6 @@ function App() {
     return notes.find((note) => note.id === activeNote);
   };
 
-
-
   return (
     <div className="App">
       <Sidebar 
