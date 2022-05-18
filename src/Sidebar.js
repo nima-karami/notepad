@@ -1,24 +1,29 @@
-function Sidebar() {
-    return <div className = 'app-sidebar'>
-        <div className = 'app-sidebar-header'>
+function Sidebar({notes, onAddNote, onDeleteNote}) {
+    return <div className = "app-sidebar">
+        <div className = "app-sidebar-header">
             <h1>Notes</h1>
-            <button>Add</button>
+            <button onClick={onAddNote}>Add</button>
         </div>
 
-        <div className = 'app-sidebar-notes'>
-            <div className = 'app-sidebar-note'>
-                <div className = 'sidebar-note-title'>
-                    <strong>Title</strong>
-                    <button>Delete</button>
+        <div className = "app-sidebar-notes">
+            {notes.map((note) => (
+                <div className = "app-sidebar-note">
+                <div className = "sidebar-note-title">
+                    <strong>{note.title}</strong>
+                    <button onClick={() => onDeleteNote(note.id)}>Delete</button>
                 </div>
 
-                <p>Note preview</p>
+                <p>{note.body && note.body.substr(0, 100) + "..."}</p>
 
-                <small className = 'meta-data'>
-                    Last modified [date]
+                <small className = "meta-data">
+                    Last modified: {new Date(note.lastModified).toLocaleDateString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    })}
                 </small>
 
             </div>
+            ))}
         </div>
     </div>
 }
